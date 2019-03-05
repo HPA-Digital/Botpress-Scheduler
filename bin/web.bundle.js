@@ -52803,234 +52803,140 @@ var SchedulerModule = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _this2 = this;
-
       console.log('Scheduler did mount?');
-      this.fetchAll().then(function () {
-        _this2.setState({ loading: false });
-      });
+      // this.fetchAll().then(() => {
+      //   this.setState({ loading: false })
+      // })
 
-      this.props.bp.events.on('scheduler.update', this.fetchAll.bind(this));
+      //this.props.bp.events.on('scheduler.update', ::this.fetchAll)
     }
   }, {
     key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
+    value: function componentWillUnmount() {}
 
-      this.props.bp.events.off('scheduler.update', this.fetchAll.bind(this));
-    }
-  }, {
-    key: 'fetchAll',
-    value: function fetchAll() {
-      var _this3 = this;
+    //this.props.bp.events.off('scheduler.update', ::this.fetchAll)
 
-      return this.fetchUpcoming().then(function () {
-        return _this3.fetchPrevious();
-      });
-    }
-  }, {
-    key: 'fetchUpcoming',
-    value: function fetchUpcoming() {
-      var _this4 = this;
 
-      return this.props.bp.axios.get(api('schedules/upcoming')).then(function (_ref) {
-        var data = _ref.data;
+    // fetchAll() {
+    //   return this.fetchUpcoming().then(() => this.fetchPrevious())
+    // }
 
-        _this4.setState({ upcoming: data });
-      });
-    }
-  }, {
-    key: 'fetchPrevious',
-    value: function fetchPrevious() {
-      var _this5 = this;
+    // fetchUpcoming() {
+    //   return this.props.bp.axios.get(api('schedules/upcoming')).then(({ data }) => {
+    //     this.setState({ upcoming: data })
+    //   })
+    // }
 
-      return this.props.bp.axios.get(api('schedules/past')).then(function (_ref2) {
-        var data = _ref2.data;
+    // fetchPrevious() {
+    //   return this.props.bp.axios.get(api('schedules/past')).then(({ data }) => {
+    //     this.setState({ previous: data })
+    //   })
+    // }
 
-        _this5.setState({ previous: data });
-      });
-    }
-  }, {
-    key: 'setActive',
-    value: function setActive(view) {
-      var _this6 = this;
+    // setActive(view) {
+    //   return () => this.setState({ active: view })
+    // }
 
-      return function () {
-        return _this6.setState({ active: view });
-      };
-    }
-  }, {
-    key: 'trashAllDone',
-    value: function trashAllDone() {
-      this.props.bp.axios.delete(api('done'));
-    }
-  }, {
-    key: 'renderUpcoming',
-    value: function renderUpcoming() {
-      var axios = this.props.bp.axios;
-      var elements = this.state.upcoming.map(function (el, i) {
-        return _react2.default.createElement(_upcoming2.default, { key: i, task: el, axios: axios });
-      });
+    // trashAllDone() {
+    //   this.props.bp.axios.delete(api('done'))
+    // }
 
-      var contain = this.state.upcoming.length === 0 ? _react2.default.createElement(
-        'div',
-        { className: _style2.default.emptyText },
-        'There are no upcoming tasks'
-      ) : _react2.default.createElement(
-        _reactBootstrap.ListGroup,
-        null,
-        elements
-      );
+    // renderUpcoming() {
+    //   const axios = this.props.bp.axios
+    //   const elements = this.state.upcoming.map((el, i) => <Upcoming key={i} task={el} axios={axios} />)
 
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          'div',
-          { className: _style2.default.sectionHeader },
-          _react2.default.createElement(
-            'h4',
-            null,
-            'Upcoming',
-            _react2.default.createElement(
-              _reactBootstrap.Badge,
-              { className: _style2.default.historyBadge },
-              _react2.default.createElement(
-                'p',
-                null,
-                this.state.upcoming.length
-              )
-            )
-          ),
-          this.renderCreateButton()
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: _style2.default.historyContain },
-          contain
-        )
-      );
-    }
-  }, {
-    key: 'renderPrevious',
-    value: function renderPrevious() {
-      var sortedElements = _lodash2.default.orderBy(this.state.previous, ['scheduledOn'], ['desc']);
-      var elements = sortedElements.map(function (el, i) {
-        return _react2.default.createElement(_previous2.default, { key: i, task: el });
-      });
+    //   const contain =
+    //     this.state.upcoming.length === 0 ? (
+    //       <div className={style.emptyText}>There are no upcoming tasks</div>
+    //     ) : (
+    //       <ListGroup>{elements}</ListGroup>
+    //     )
 
-      var contain = this.state.previous.length === 0 ? _react2.default.createElement(
-        'div',
-        { className: _style2.default.emptyText },
-        'There are no previously run tasks'
-      ) : _react2.default.createElement(
-        _reactBootstrap.ListGroup,
-        null,
-        elements
-      );
+    //   return (
+    //     <div>
+    //       <div className={style.sectionHeader}>
+    //         <h4>
+    //           {'Upcoming'}
+    //           <Badge className={style.historyBadge}>
+    //             <p>{this.state.upcoming.length}</p>
+    //           </Badge>
+    //         </h4>
+    //         {this.renderCreateButton()}
+    //       </div>
+    //       <div className={style.historyContain}>{contain}</div>
+    //     </div>
+    //   )
+    // }
 
-      var tooltip = _react2.default.createElement(
-        _reactBootstrap.Tooltip,
-        { id: 'tooltip' },
-        'Trash all'
-      );
+    // renderPrevious() {
+    //   const sortedElements = _.orderBy(this.state.previous, ['scheduledOn'], ['desc'])
+    //   const elements = sortedElements.map((el, i) => <Previous key={i} task={el} />)
 
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          'div',
-          { className: _style2.default.sectionHeader },
-          _react2.default.createElement(
-            'h4',
-            null,
-            'History',
-            _react2.default.createElement(
-              _reactBootstrap.Badge,
-              { className: _style2.default.historyBadge },
-              _react2.default.createElement(
-                'p',
-                null,
-                this.state.previous.length
-              )
-            )
-          ),
-          _react2.default.createElement(
-            _reactBootstrap.OverlayTrigger,
-            { placement: 'top', overlay: tooltip },
-            _react2.default.createElement(
-              'a',
-              { className: _style2.default.trashAll, href: '#', onClick: this.trashAllDone.bind(this) },
-              _react2.default.createElement(
-                'i',
-                { className: 'material-icons' },
-                'delete'
-              )
-            )
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: _style2.default.historyContain },
-          contain
-        )
-      );
-    }
-  }, {
-    key: 'renderLoading',
-    value: function renderLoading() {
-      return _react2.default.createElement(
-        'h1',
-        null,
-        'Loading...'
-      );
-    }
-  }, {
-    key: 'renderCreateButton',
-    value: function renderCreateButton() {
-      var _this7 = this;
+    //   const contain =
+    //     this.state.previous.length === 0 ? (
+    //       <div className={style.emptyText}>There are no previously run tasks</div>
+    //     ) : (
+    //       <ListGroup>{elements}</ListGroup>
+    //     )
 
-      var click = function click() {
-        return _this7.createModal.show();
-      };
-      return _react2.default.createElement(
-        _reactBootstrap.Button,
-        { bsStyle: 'primary', onClick: click },
-        'Create'
-      );
-    }
+    //   const tooltip = <Tooltip id="tooltip">Trash all</Tooltip>
+
+    //   return (
+    //     <div>
+    //       <div className={style.sectionHeader}>
+    //         <h4>
+    //           {'History'}
+    //           <Badge className={style.historyBadge}>
+    //             <p>{this.state.previous.length}</p>
+    //           </Badge>
+    //         </h4>
+
+    //         <OverlayTrigger placement="top" overlay={tooltip}>
+    //           <a className={style.trashAll} href="#" onClick={::this.trashAllDone}>
+    //             <i className="material-icons">delete</i>
+    //           </a>
+    //         </OverlayTrigger>
+    //       </div>
+    //       <div className={style.historyContain}>{contain}</div>
+    //     </div>
+    //   )
+    // }
+
+    // renderLoading() {
+    //   return <h1>Loading...</h1>
+    // }
+
+    // renderCreateButton() {
+    //   const click = () => this.createModal.show()
+    //   return (
+    //     <Button bsStyle="primary" onClick={click}>
+    //       Create
+    //     </Button>
+    //   )
+    // }
+
   }, {
     key: 'render',
     value: function render() {
-      var _this8 = this;
+      // if (this.state.loading) {
+      //   return this.renderLoading()
+      // }
 
-      if (this.state.loading) {
-        return this.renderLoading();
-      }
-
+      // return (
+      //   <div className={style.mainContainer}>
+      //     <Grid>
+      //       <Row>
+      //         <Col md={8}>{this.renderUpcoming()}</Col>
+      //         <Col md={4}>{this.renderPrevious()}</Col>
+      //       </Row>
+      //     </Grid>
+      //     <CreateModal ref={r => (this.createModal = r)} axios={this.props.bp.axios} />
+      //   </div>
+      // )
       return _react2.default.createElement(
         'div',
-        { className: _style2.default.mainContainer },
-        _react2.default.createElement(
-          _reactBootstrap.Grid,
-          null,
-          _react2.default.createElement(
-            _reactBootstrap.Row,
-            null,
-            _react2.default.createElement(
-              _reactBootstrap.Col,
-              { md: 8 },
-              this.renderUpcoming()
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.Col,
-              { md: 4 },
-              this.renderPrevious()
-            )
-          )
-        ),
-        _react2.default.createElement(_create2.default, { ref: function ref(r) {
-            return _this8.createModal = r;
-          }, axios: this.props.bp.axios })
+        null,
+        'Hello World'
       );
     }
   }]);
