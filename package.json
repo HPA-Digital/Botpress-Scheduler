@@ -1,5 +1,5 @@
 {
-  "name": "@hpa-digital/botpress-scheduler",
+  "name": "@botpress/scheduler",
   "version": "10.51.10",
   "description": "Schedule one-off and recurring tasks",
   "main": "bin/node.bundle.js",

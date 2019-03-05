@@ -1,4 +1,4 @@
-botpress = typeof botpress === "object" ? botpress : {}; botpress["@hpa-digital/botpress-scheduler"] =
+botpress = typeof botpress === "object" ? botpress : {}; botpress["@botpress/scheduler"] =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -52803,140 +52803,234 @@ var SchedulerModule = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      console.log('Scheduler did mount?');
-      // this.fetchAll().then(() => {
-      //   this.setState({ loading: false })
-      // })
+      var _this2 = this;
 
-      //this.props.bp.events.on('scheduler.update', ::this.fetchAll)
+      console.log('Scheduler did mount?');
+      this.fetchAll().then(function () {
+        _this2.setState({ loading: false });
+      });
+
+      this.props.bp.events.on('scheduler.update', this.fetchAll.bind(this));
     }
   }, {
     key: 'componentWillUnmount',
-    value: function componentWillUnmount() {}
+    value: function componentWillUnmount() {
 
-    //this.props.bp.events.off('scheduler.update', ::this.fetchAll)
-
-
-    // fetchAll() {
-    //   return this.fetchUpcoming().then(() => this.fetchPrevious())
-    // }
-
-    // fetchUpcoming() {
-    //   return this.props.bp.axios.get(api('schedules/upcoming')).then(({ data }) => {
-    //     this.setState({ upcoming: data })
-    //   })
-    // }
-
-    // fetchPrevious() {
-    //   return this.props.bp.axios.get(api('schedules/past')).then(({ data }) => {
-    //     this.setState({ previous: data })
-    //   })
-    // }
-
-    // setActive(view) {
-    //   return () => this.setState({ active: view })
-    // }
-
-    // trashAllDone() {
-    //   this.props.bp.axios.delete(api('done'))
-    // }
-
-    // renderUpcoming() {
-    //   const axios = this.props.bp.axios
-    //   const elements = this.state.upcoming.map((el, i) => <Upcoming key={i} task={el} axios={axios} />)
-
-    //   const contain =
-    //     this.state.upcoming.length === 0 ? (
-    //       <div className={style.emptyText}>There are no upcoming tasks</div>
-    //     ) : (
-    //       <ListGroup>{elements}</ListGroup>
-    //     )
-
-    //   return (
-    //     <div>
-    //       <div className={style.sectionHeader}>
-    //         <h4>
-    //           {'Upcoming'}
-    //           <Badge className={style.historyBadge}>
-    //             <p>{this.state.upcoming.length}</p>
-    //           </Badge>
-    //         </h4>
-    //         {this.renderCreateButton()}
-    //       </div>
-    //       <div className={style.historyContain}>{contain}</div>
-    //     </div>
-    //   )
-    // }
-
-    // renderPrevious() {
-    //   const sortedElements = _.orderBy(this.state.previous, ['scheduledOn'], ['desc'])
-    //   const elements = sortedElements.map((el, i) => <Previous key={i} task={el} />)
-
-    //   const contain =
-    //     this.state.previous.length === 0 ? (
-    //       <div className={style.emptyText}>There are no previously run tasks</div>
-    //     ) : (
-    //       <ListGroup>{elements}</ListGroup>
-    //     )
-
-    //   const tooltip = <Tooltip id="tooltip">Trash all</Tooltip>
-
-    //   return (
-    //     <div>
-    //       <div className={style.sectionHeader}>
-    //         <h4>
-    //           {'History'}
-    //           <Badge className={style.historyBadge}>
-    //             <p>{this.state.previous.length}</p>
-    //           </Badge>
-    //         </h4>
-
-    //         <OverlayTrigger placement="top" overlay={tooltip}>
-    //           <a className={style.trashAll} href="#" onClick={::this.trashAllDone}>
-    //             <i className="material-icons">delete</i>
-    //           </a>
-    //         </OverlayTrigger>
-    //       </div>
-    //       <div className={style.historyContain}>{contain}</div>
-    //     </div>
-    //   )
-    // }
-
-    // renderLoading() {
-    //   return <h1>Loading...</h1>
-    // }
-
-    // renderCreateButton() {
-    //   const click = () => this.createModal.show()
-    //   return (
-    //     <Button bsStyle="primary" onClick={click}>
-    //       Create
-    //     </Button>
-    //   )
-    // }
-
+      this.props.bp.events.off('scheduler.update', this.fetchAll.bind(this));
+    }
   }, {
-    key: 'render',
-    value: function render() {
-      // if (this.state.loading) {
-      //   return this.renderLoading()
-      // }
+    key: 'fetchAll',
+    value: function fetchAll() {
+      var _this3 = this;
 
-      // return (
-      //   <div className={style.mainContainer}>
-      //     <Grid>
-      //       <Row>
-      //         <Col md={8}>{this.renderUpcoming()}</Col>
-      //         <Col md={4}>{this.renderPrevious()}</Col>
-      //       </Row>
-      //     </Grid>
-      //     <CreateModal ref={r => (this.createModal = r)} axios={this.props.bp.axios} />
-      //   </div>
-      // )
+      return this.fetchUpcoming().then(function () {
+        return _this3.fetchPrevious();
+      });
+    }
+  }, {
+    key: 'fetchUpcoming',
+    value: function fetchUpcoming() {
+      var _this4 = this;
+
+      return this.props.bp.axios.get(api('schedules/upcoming')).then(function (_ref) {
+        var data = _ref.data;
+
+        _this4.setState({ upcoming: data });
+      });
+    }
+  }, {
+    key: 'fetchPrevious',
+    value: function fetchPrevious() {
+      var _this5 = this;
+
+      return this.props.bp.axios.get(api('schedules/past')).then(function (_ref2) {
+        var data = _ref2.data;
+
+        _this5.setState({ previous: data });
+      });
+    }
+  }, {
+    key: 'setActive',
+    value: function setActive(view) {
+      var _this6 = this;
+
+      return function () {
+        return _this6.setState({ active: view });
+      };
+    }
+  }, {
+    key: 'trashAllDone',
+    value: function trashAllDone() {
+      this.props.bp.axios.delete(api('done'));
+    }
+  }, {
+    key: 'renderUpcoming',
+    value: function renderUpcoming() {
+      var axios = this.props.bp.axios;
+      var elements = this.state.upcoming.map(function (el, i) {
+        return _react2.default.createElement(_upcoming2.default, { key: i, task: el, axios: axios });
+      });
+
+      var contain = this.state.upcoming.length === 0 ? _react2.default.createElement(
+        'div',
+        { className: _style2.default.emptyText },
+        'There are no upcoming tasks'
+      ) : _react2.default.createElement(
+        _reactBootstrap.ListGroup,
+        null,
+        elements
+      );
+
       return _react2.default.createElement(
         'div',
         null,
-        'Hello World'
+        _react2.default.createElement(
+          'div',
+          { className: _style2.default.sectionHeader },
+          _react2.default.createElement(
+            'h4',
+            null,
+            'Upcoming',
+            _react2.default.createElement(
+              _reactBootstrap.Badge,
+              { className: _style2.default.historyBadge },
+              _react2.default.createElement(
+                'p',
+                null,
+                this.state.upcoming.length
+              )
+            )
+          ),
+          this.renderCreateButton()
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: _style2.default.historyContain },
+          contain
+        )
+      );
+    }
+  }, {
+    key: 'renderPrevious',
+    value: function renderPrevious() {
+      var sortedElements = _lodash2.default.orderBy(this.state.previous, ['scheduledOn'], ['desc']);
+      var elements = sortedElements.map(function (el, i) {
+        return _react2.default.createElement(_previous2.default, { key: i, task: el });
+      });
+
+      var contain = this.state.previous.length === 0 ? _react2.default.createElement(
+        'div',
+        { className: _style2.default.emptyText },
+        'There are no previously run tasks'
+      ) : _react2.default.createElement(
+        _reactBootstrap.ListGroup,
+        null,
+        elements
+      );
+
+      var tooltip = _react2.default.createElement(
+        _reactBootstrap.Tooltip,
+        { id: 'tooltip' },
+        'Trash all'
+      );
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'div',
+          { className: _style2.default.sectionHeader },
+          _react2.default.createElement(
+            'h4',
+            null,
+            'History',
+            _react2.default.createElement(
+              _reactBootstrap.Badge,
+              { className: _style2.default.historyBadge },
+              _react2.default.createElement(
+                'p',
+                null,
+                this.state.previous.length
+              )
+            )
+          ),
+          _react2.default.createElement(
+            _reactBootstrap.OverlayTrigger,
+            { placement: 'top', overlay: tooltip },
+            _react2.default.createElement(
+              'a',
+              { className: _style2.default.trashAll, href: '#', onClick: this.trashAllDone.bind(this) },
+              _react2.default.createElement(
+                'i',
+                { className: 'material-icons' },
+                'delete'
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: _style2.default.historyContain },
+          contain
+        )
+      );
+    }
+  }, {
+    key: 'renderLoading',
+    value: function renderLoading() {
+      return _react2.default.createElement(
+        'h1',
+        null,
+        'Loading...'
+      );
+    }
+  }, {
+    key: 'renderCreateButton',
+    value: function renderCreateButton() {
+      var _this7 = this;
+
+      var click = function click() {
+        return _this7.createModal.show();
+      };
+      return _react2.default.createElement(
+        _reactBootstrap.Button,
+        { bsStyle: 'primary', onClick: click },
+        'Create'
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this8 = this;
+
+      if (this.state.loading) {
+        return this.renderLoading();
+      }
+
+      return _react2.default.createElement(
+        'div',
+        { className: _style2.default.mainContainer },
+        _react2.default.createElement(
+          _reactBootstrap.Grid,
+          null,
+          _react2.default.createElement(
+            _reactBootstrap.Row,
+            null,
+            _react2.default.createElement(
+              _reactBootstrap.Col,
+              { md: 8 },
+              this.renderUpcoming()
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Col,
+              { md: 4 },
+              this.renderPrevious()
+            )
+          )
+        ),
+        _react2.default.createElement(_create2.default, { ref: function ref(r) {
+            return _this8.createModal = r;
+          }, axios: this.props.bp.axios })
       );
     }
   }]);
@@ -54749,20 +54843,20 @@ exports = module.exports = __webpack_require__(9)(false);
 
 
 // module
-exports.push([module.i, ".-hpa-digital-botpress-scheduler__style__task___-HV0l {\n  border-top: none;\n  text-align: left;\n  border-radius: 0 !important; }\n\n.-hpa-digital-botpress-scheduler__style__header_id___3mndo {\n  font-size: 20px;\n  font-weight: 300; }\n\n.-hpa-digital-botpress-scheduler__style__header_when___--AiO {\n  margin-left: 5px;\n  font-size: 16px;\n  font-weight: 100;\n  color: #888; }\n\n.-hpa-digital-botpress-scheduler__style__line___20K4u {\n  display: block;\n  font-weight: 400;\n  margin-bottom: 5px; }\n  .-hpa-digital-botpress-scheduler__style__line___20K4u span {\n    font-weight: 200; }\n\n.-hpa-digital-botpress-scheduler__style__toggleLogs___2RBzT {\n  cursor: pointer;\n  background-color: #eee;\n  color: #333; }\n  .-hpa-digital-botpress-scheduler__style__toggleLogs___2RBzT:hover {\n    background-color: #ccc; }\n\n.-hpa-digital-botpress-scheduler__style__action___D0ytJ {\n  display: block;\n  margin-top: 5px;\n  border-left: 4px solid #90e9e1;\n  padding: 10px;\n  height: 100px; }\n\n.-hpa-digital-botpress-scheduler__style__status-error___3zBGE {\n  color: #b0140d;\n  border-bottom: 2px solid #b0140d; }\n\n.-hpa-digital-botpress-scheduler__style__status-executing___s1u3J {\n  color: #ddda5c;\n  border-bottom: 2px solid #ddda5c; }\n\n.-hpa-digital-botpress-scheduler__style__status-skipped___1LDO- {\n  color: #999;\n  border-bottom: 2px solid #999; }\n\n.-hpa-digital-botpress-scheduler__style__status-done___3dVl6 {\n  color: #14a656;\n  border-bottom: 2px solid #14a656; }\n", ""]);
+exports.push([module.i, ".-botpress-scheduler__style__task___-HV0l {\n  border-top: none;\n  text-align: left;\n  border-radius: 0 !important; }\n\n.-botpress-scheduler__style__header_id___3mndo {\n  font-size: 20px;\n  font-weight: 300; }\n\n.-botpress-scheduler__style__header_when___--AiO {\n  margin-left: 5px;\n  font-size: 16px;\n  font-weight: 100;\n  color: #888; }\n\n.-botpress-scheduler__style__line___20K4u {\n  display: block;\n  font-weight: 400;\n  margin-bottom: 5px; }\n  .-botpress-scheduler__style__line___20K4u span {\n    font-weight: 200; }\n\n.-botpress-scheduler__style__toggleLogs___2RBzT {\n  cursor: pointer;\n  background-color: #eee;\n  color: #333; }\n  .-botpress-scheduler__style__toggleLogs___2RBzT:hover {\n    background-color: #ccc; }\n\n.-botpress-scheduler__style__action___D0ytJ {\n  display: block;\n  margin-top: 5px;\n  border-left: 4px solid #90e9e1;\n  padding: 10px;\n  height: 100px; }\n\n.-botpress-scheduler__style__status-error___3zBGE {\n  color: #b0140d;\n  border-bottom: 2px solid #b0140d; }\n\n.-botpress-scheduler__style__status-executing___s1u3J {\n  color: #ddda5c;\n  border-bottom: 2px solid #ddda5c; }\n\n.-botpress-scheduler__style__status-skipped___1LDO- {\n  color: #999;\n  border-bottom: 2px solid #999; }\n\n.-botpress-scheduler__style__status-done___3dVl6 {\n  color: #14a656;\n  border-bottom: 2px solid #14a656; }\n", ""]);
 
 // exports
 exports.locals = {
-	"task": "-hpa-digital-botpress-scheduler__style__task___-HV0l",
-	"header_id": "-hpa-digital-botpress-scheduler__style__header_id___3mndo",
-	"header_when": "-hpa-digital-botpress-scheduler__style__header_when___--AiO",
-	"line": "-hpa-digital-botpress-scheduler__style__line___20K4u",
-	"toggleLogs": "-hpa-digital-botpress-scheduler__style__toggleLogs___2RBzT",
-	"action": "-hpa-digital-botpress-scheduler__style__action___D0ytJ",
-	"status-error": "-hpa-digital-botpress-scheduler__style__status-error___3zBGE",
-	"status-executing": "-hpa-digital-botpress-scheduler__style__status-executing___s1u3J",
-	"status-skipped": "-hpa-digital-botpress-scheduler__style__status-skipped___1LDO-",
-	"status-done": "-hpa-digital-botpress-scheduler__style__status-done___3dVl6"
+	"task": "-botpress-scheduler__style__task___-HV0l",
+	"header_id": "-botpress-scheduler__style__header_id___3mndo",
+	"header_when": "-botpress-scheduler__style__header_when___--AiO",
+	"line": "-botpress-scheduler__style__line___20K4u",
+	"toggleLogs": "-botpress-scheduler__style__toggleLogs___2RBzT",
+	"action": "-botpress-scheduler__style__action___D0ytJ",
+	"status-error": "-botpress-scheduler__style__status-error___3zBGE",
+	"status-executing": "-botpress-scheduler__style__status-executing___s1u3J",
+	"status-skipped": "-botpress-scheduler__style__status-skipped___1LDO-",
+	"status-done": "-botpress-scheduler__style__status-done___3dVl6"
 };
 
 /***/ }),
@@ -54965,20 +55059,20 @@ exports = module.exports = __webpack_require__(9)(false);
 
 
 // module
-exports.push([module.i, ".-hpa-digital-botpress-scheduler__style__task___J_mxc {\n  text-align: left;\n  border-radius: 0 !important;\n  border-top: none;\n  margin-bottom: 0px; }\n\n.-hpa-digital-botpress-scheduler__style__header_id___95Cvk {\n  font-size: 20px;\n  font-weight: 300; }\n\n.-hpa-digital-botpress-scheduler__style__header_when___fXfrY {\n  margin-left: 5px;\n  font-size: 16px;\n  font-weight: 100;\n  color: #888; }\n\n.-hpa-digital-botpress-scheduler__style__panel___2ZU3L.-hpa-digital-botpress-scheduler__style__soon___xSCjQ {\n  font-weight: 300;\n  color: #b0140d; }\n\n.-hpa-digital-botpress-scheduler__style__line___1TkKa {\n  display: block;\n  font-weight: 400; }\n  .-hpa-digital-botpress-scheduler__style__line___1TkKa span {\n    color: #888;\n    font-weight: 200; }\n\n.-hpa-digital-botpress-scheduler__style__delete___j9LzL {\n  bottom: 10px;\n  font-size: 16px;\n  margin-left: 5px;\n  vertical-align: middle;\n  transition: color ease-in-out 0.15s, opacity ease-in-out 0.15s;\n  opacity: 0;\n  color: #ccc; }\n\n.-hpa-digital-botpress-scheduler__style__task___J_mxc:hover .-hpa-digital-botpress-scheduler__style__delete___j9LzL {\n  cursor: pointer;\n  opacity: 1; }\n  .-hpa-digital-botpress-scheduler__style__task___J_mxc:hover .-hpa-digital-botpress-scheduler__style__delete___j9LzL:hover {\n    color: #888; }\n\n.-hpa-digital-botpress-scheduler__style__action___2vdTd {\n  display: block;\n  margin: 10px 0;\n  border: 1px solid #eee;\n  border-radius: 3px;\n  border-left: 4px solid #ddd;\n  color: #999;\n  padding: 10px;\n  height: 50px;\n  overflow: hidden; }\n\ntextarea.-hpa-digital-botpress-scheduler__style__action___2vdTd {\n  width: 100%;\n  height: 200px;\n  padding: 10px 0; }\n\n.-hpa-digital-botpress-scheduler__style__toggle___3djFT {\n  display: block;\n  position: absolute;\n  top: 15px;\n  right: 25px; }\n  .-hpa-digital-botpress-scheduler__style__toggle___3djFT.react-toggle--checked .react-toggle-thumb {\n    border-color: #56c0b2; }\n  .-hpa-digital-botpress-scheduler__style__toggle___3djFT.react-toggle--checked .react-toggle-track {\n    background-color: #56c0b2 !important; }\n\n.-hpa-digital-botpress-scheduler__style__buttons___2YEmq {\n  text-align: right;\n  padding-top: 10px; }\n  .-hpa-digital-botpress-scheduler__style__buttons___2YEmq button {\n    width: 100px;\n    margin-left: 5px; }\n  .-hpa-digital-botpress-scheduler__style__buttons___2YEmq .btn-success {\n    color: #fff;\n    background-color: #4cbeb9;\n    border-color: #4cbeb9;\n    transition: background-color ease-in-out 0.15s; }\n    .-hpa-digital-botpress-scheduler__style__buttons___2YEmq .btn-success:hover {\n      background-color: #46b0ac;\n      border-color: #46b0ac; }\n", ""]);
+exports.push([module.i, ".-botpress-scheduler__style__task___J_mxc {\n  text-align: left;\n  border-radius: 0 !important;\n  border-top: none;\n  margin-bottom: 0px; }\n\n.-botpress-scheduler__style__header_id___95Cvk {\n  font-size: 20px;\n  font-weight: 300; }\n\n.-botpress-scheduler__style__header_when___fXfrY {\n  margin-left: 5px;\n  font-size: 16px;\n  font-weight: 100;\n  color: #888; }\n\n.-botpress-scheduler__style__panel___2ZU3L.-botpress-scheduler__style__soon___xSCjQ {\n  font-weight: 300;\n  color: #b0140d; }\n\n.-botpress-scheduler__style__line___1TkKa {\n  display: block;\n  font-weight: 400; }\n  .-botpress-scheduler__style__line___1TkKa span {\n    color: #888;\n    font-weight: 200; }\n\n.-botpress-scheduler__style__delete___j9LzL {\n  bottom: 10px;\n  font-size: 16px;\n  margin-left: 5px;\n  vertical-align: middle;\n  transition: color ease-in-out 0.15s, opacity ease-in-out 0.15s;\n  opacity: 0;\n  color: #ccc; }\n\n.-botpress-scheduler__style__task___J_mxc:hover .-botpress-scheduler__style__delete___j9LzL {\n  cursor: pointer;\n  opacity: 1; }\n  .-botpress-scheduler__style__task___J_mxc:hover .-botpress-scheduler__style__delete___j9LzL:hover {\n    color: #888; }\n\n.-botpress-scheduler__style__action___2vdTd {\n  display: block;\n  margin: 10px 0;\n  border: 1px solid #eee;\n  border-radius: 3px;\n  border-left: 4px solid #ddd;\n  color: #999;\n  padding: 10px;\n  height: 50px;\n  overflow: hidden; }\n\ntextarea.-botpress-scheduler__style__action___2vdTd {\n  width: 100%;\n  height: 200px;\n  padding: 10px 0; }\n\n.-botpress-scheduler__style__toggle___3djFT {\n  display: block;\n  position: absolute;\n  top: 15px;\n  right: 25px; }\n  .-botpress-scheduler__style__toggle___3djFT.react-toggle--checked .react-toggle-thumb {\n    border-color: #56c0b2; }\n  .-botpress-scheduler__style__toggle___3djFT.react-toggle--checked .react-toggle-track {\n    background-color: #56c0b2 !important; }\n\n.-botpress-scheduler__style__buttons___2YEmq {\n  text-align: right;\n  padding-top: 10px; }\n  .-botpress-scheduler__style__buttons___2YEmq button {\n    width: 100px;\n    margin-left: 5px; }\n  .-botpress-scheduler__style__buttons___2YEmq .btn-success {\n    color: #fff;\n    background-color: #4cbeb9;\n    border-color: #4cbeb9;\n    transition: background-color ease-in-out 0.15s; }\n    .-botpress-scheduler__style__buttons___2YEmq .btn-success:hover {\n      background-color: #46b0ac;\n      border-color: #46b0ac; }\n", ""]);
 
 // exports
 exports.locals = {
-	"task": "-hpa-digital-botpress-scheduler__style__task___J_mxc",
-	"header_id": "-hpa-digital-botpress-scheduler__style__header_id___95Cvk",
-	"header_when": "-hpa-digital-botpress-scheduler__style__header_when___fXfrY",
-	"panel": "-hpa-digital-botpress-scheduler__style__panel___2ZU3L",
-	"soon": "-hpa-digital-botpress-scheduler__style__soon___xSCjQ",
-	"line": "-hpa-digital-botpress-scheduler__style__line___1TkKa",
-	"delete": "-hpa-digital-botpress-scheduler__style__delete___j9LzL",
-	"action": "-hpa-digital-botpress-scheduler__style__action___2vdTd",
-	"toggle": "-hpa-digital-botpress-scheduler__style__toggle___3djFT",
-	"buttons": "-hpa-digital-botpress-scheduler__style__buttons___2YEmq"
+	"task": "-botpress-scheduler__style__task___J_mxc",
+	"header_id": "-botpress-scheduler__style__header_id___95Cvk",
+	"header_when": "-botpress-scheduler__style__header_when___fXfrY",
+	"panel": "-botpress-scheduler__style__panel___2ZU3L",
+	"soon": "-botpress-scheduler__style__soon___xSCjQ",
+	"line": "-botpress-scheduler__style__line___1TkKa",
+	"delete": "-botpress-scheduler__style__delete___j9LzL",
+	"action": "-botpress-scheduler__style__action___2vdTd",
+	"toggle": "-botpress-scheduler__style__toggle___3djFT",
+	"buttons": "-botpress-scheduler__style__buttons___2YEmq"
 };
 
 /***/ }),
@@ -63825,17 +63919,17 @@ exports = module.exports = __webpack_require__(9)(false);
 
 
 // module
-exports.push([module.i, ".-hpa-digital-botpress-scheduler__style__editable___48w9J {\n  padding: 0 0 2px 0;\n  border-bottom: dashed 2px #a9cac8; }\n\n.-hpa-digital-botpress-scheduler__style__header___19e3x {\n  font-size: 22px;\n  color: #222;\n  font-weight: 400; }\n\ninput.-hpa-digital-botpress-scheduler__style__header___19e3x {\n  border: 1px; }\n\n.-hpa-digital-botpress-scheduler__style__expressions___3zjJ2 {\n  font-size: 16px; }\n\n.-hpa-digital-botpress-scheduler__style__expressionType___3MZI6 {\n  font-weight: 400;\n  margin-right: 5px; }\n\n.-hpa-digital-botpress-scheduler__style__expression___3pvGE {\n  margin-left: 20px;\n  font-weight: 400;\n  margin-right: 5px; }\n\n.-hpa-digital-botpress-scheduler__style__callout___1bxE8 {\n  margin: 10px 0;\n  border-radius: 3px;\n  border-left: 4px solid lightgrey;\n  padding: 10px; }\n  .-hpa-digital-botpress-scheduler__style__callout___1bxE8 span {\n    margin-left: 5px;\n    background-color: #f3f3f3;\n    color: #333; }\n\n.-hpa-digital-botpress-scheduler__style__action___-lmBa {\n  width: 100%;\n  height: 200px; }\n\ntextarea.-hpa-digital-botpress-scheduler__style__action___-lmBa {\n  border: none; }\n", ""]);
+exports.push([module.i, ".-botpress-scheduler__style__editable___48w9J {\n  padding: 0 0 2px 0;\n  border-bottom: dashed 2px #a9cac8; }\n\n.-botpress-scheduler__style__header___19e3x {\n  font-size: 22px;\n  color: #222;\n  font-weight: 400; }\n\ninput.-botpress-scheduler__style__header___19e3x {\n  border: 1px; }\n\n.-botpress-scheduler__style__expressions___3zjJ2 {\n  font-size: 16px; }\n\n.-botpress-scheduler__style__expressionType___3MZI6 {\n  font-weight: 400;\n  margin-right: 5px; }\n\n.-botpress-scheduler__style__expression___3pvGE {\n  margin-left: 20px;\n  font-weight: 400;\n  margin-right: 5px; }\n\n.-botpress-scheduler__style__callout___1bxE8 {\n  margin: 10px 0;\n  border-radius: 3px;\n  border-left: 4px solid lightgrey;\n  padding: 10px; }\n  .-botpress-scheduler__style__callout___1bxE8 span {\n    margin-left: 5px;\n    background-color: #f3f3f3;\n    color: #333; }\n\n.-botpress-scheduler__style__action___-lmBa {\n  width: 100%;\n  height: 200px; }\n\ntextarea.-botpress-scheduler__style__action___-lmBa {\n  border: none; }\n", ""]);
 
 // exports
 exports.locals = {
-	"editable": "-hpa-digital-botpress-scheduler__style__editable___48w9J",
-	"header": "-hpa-digital-botpress-scheduler__style__header___19e3x",
-	"expressions": "-hpa-digital-botpress-scheduler__style__expressions___3zjJ2",
-	"expressionType": "-hpa-digital-botpress-scheduler__style__expressionType___3MZI6",
-	"expression": "-hpa-digital-botpress-scheduler__style__expression___3pvGE",
-	"callout": "-hpa-digital-botpress-scheduler__style__callout___1bxE8",
-	"action": "-hpa-digital-botpress-scheduler__style__action___-lmBa"
+	"editable": "-botpress-scheduler__style__editable___48w9J",
+	"header": "-botpress-scheduler__style__header___19e3x",
+	"expressions": "-botpress-scheduler__style__expressions___3zjJ2",
+	"expressionType": "-botpress-scheduler__style__expressionType___3MZI6",
+	"expression": "-botpress-scheduler__style__expression___3pvGE",
+	"callout": "-botpress-scheduler__style__callout___1bxE8",
+	"action": "-botpress-scheduler__style__action___-lmBa"
 };
 
 /***/ }),
@@ -63897,18 +63991,18 @@ exports = module.exports = __webpack_require__(9)(false);
 
 
 // module
-exports.push([module.i, ".-hpa-digital-botpress-scheduler__style__mainContainer___wasuv .container {\n  margin: 0;\n  padding: 0;\n  width: 100%; }\n\n.-hpa-digital-botpress-scheduler__style__sectionHeader___1iOLD {\n  border: solid 1px #ddd;\n  padding: 15px;\n  margin: 0;\n  background-color: white;\n  position: relative; }\n  .-hpa-digital-botpress-scheduler__style__sectionHeader___1iOLD h4 {\n    font-weight: bolder;\n    color: gray;\n    font-size: 22px;\n    margin: 0; }\n  .-hpa-digital-botpress-scheduler__style__sectionHeader___1iOLD a {\n    position: absolute;\n    right: 10px;\n    top: 14px; }\n  .-hpa-digital-botpress-scheduler__style__sectionHeader___1iOLD .-hpa-digital-botpress-scheduler__style__historyBadge___p6Kly {\n    margin-left: 10px;\n    vertical-align: middle; }\n    .-hpa-digital-botpress-scheduler__style__sectionHeader___1iOLD .-hpa-digital-botpress-scheduler__style__historyBadge___p6Kly p {\n      line-height: 16px;\n      padding-top: 1px;\n      padding-right: 1px; }\n  .-hpa-digital-botpress-scheduler__style__sectionHeader___1iOLD button {\n    position: absolute;\n    right: 10px;\n    top: 12px;\n    background-color: #56c0b2;\n    border: none; }\n    .-hpa-digital-botpress-scheduler__style__sectionHeader___1iOLD button:hover {\n      background-color: #36baa9; }\n\n.-hpa-digital-botpress-scheduler__style__emptyText___1E8ih {\n  border: solid 1px #ddd;\n  border-top: none;\n  padding: 15px;\n  margin: 0;\n  background-color: white; }\n\n.-hpa-digital-botpress-scheduler__style__row-centered___14yce {\n  text-align: center; }\n\n.-hpa-digital-botpress-scheduler__style__col-centered___qoe4C {\n  display: inline-block;\n  float: none;\n  text-align: middle;\n  margin-right: -4px; }\n\n.badge p {\n  font-size: 12px;\n  line-height: 12px;\n  padding-top: 2px;\n  margin: 0; }\n\n.-hpa-digital-botpress-scheduler__style__tasks___3d5RE {\n  margin-top: 15px; }\n\n.-hpa-digital-botpress-scheduler__style__trashAll___2-48U a {\n  color: #17ba90; }\n", ""]);
+exports.push([module.i, ".-botpress-scheduler__style__mainContainer___wasuv .container {\n  margin: 0;\n  padding: 0;\n  width: 100%; }\n\n.-botpress-scheduler__style__sectionHeader___1iOLD {\n  border: solid 1px #ddd;\n  padding: 15px;\n  margin: 0;\n  background-color: white;\n  position: relative; }\n  .-botpress-scheduler__style__sectionHeader___1iOLD h4 {\n    font-weight: bolder;\n    color: gray;\n    font-size: 22px;\n    margin: 0; }\n  .-botpress-scheduler__style__sectionHeader___1iOLD a {\n    position: absolute;\n    right: 10px;\n    top: 14px; }\n  .-botpress-scheduler__style__sectionHeader___1iOLD .-botpress-scheduler__style__historyBadge___p6Kly {\n    margin-left: 10px;\n    vertical-align: middle; }\n    .-botpress-scheduler__style__sectionHeader___1iOLD .-botpress-scheduler__style__historyBadge___p6Kly p {\n      line-height: 16px;\n      padding-top: 1px;\n      padding-right: 1px; }\n  .-botpress-scheduler__style__sectionHeader___1iOLD button {\n    position: absolute;\n    right: 10px;\n    top: 12px;\n    background-color: #56c0b2;\n    border: none; }\n    .-botpress-scheduler__style__sectionHeader___1iOLD button:hover {\n      background-color: #36baa9; }\n\n.-botpress-scheduler__style__emptyText___1E8ih {\n  border: solid 1px #ddd;\n  border-top: none;\n  padding: 15px;\n  margin: 0;\n  background-color: white; }\n\n.-botpress-scheduler__style__row-centered___14yce {\n  text-align: center; }\n\n.-botpress-scheduler__style__col-centered___qoe4C {\n  display: inline-block;\n  float: none;\n  text-align: middle;\n  margin-right: -4px; }\n\n.badge p {\n  font-size: 12px;\n  line-height: 12px;\n  padding-top: 2px;\n  margin: 0; }\n\n.-botpress-scheduler__style__tasks___3d5RE {\n  margin-top: 15px; }\n\n.-botpress-scheduler__style__trashAll___2-48U a {\n  color: #17ba90; }\n", ""]);
 
 // exports
 exports.locals = {
-	"mainContainer": "-hpa-digital-botpress-scheduler__style__mainContainer___wasuv",
-	"sectionHeader": "-hpa-digital-botpress-scheduler__style__sectionHeader___1iOLD",
-	"historyBadge": "-hpa-digital-botpress-scheduler__style__historyBadge___p6Kly",
-	"emptyText": "-hpa-digital-botpress-scheduler__style__emptyText___1E8ih",
-	"row-centered": "-hpa-digital-botpress-scheduler__style__row-centered___14yce",
-	"col-centered": "-hpa-digital-botpress-scheduler__style__col-centered___qoe4C",
-	"tasks": "-hpa-digital-botpress-scheduler__style__tasks___3d5RE",
-	"trashAll": "-hpa-digital-botpress-scheduler__style__trashAll___2-48U"
+	"mainContainer": "-botpress-scheduler__style__mainContainer___wasuv",
+	"sectionHeader": "-botpress-scheduler__style__sectionHeader___1iOLD",
+	"historyBadge": "-botpress-scheduler__style__historyBadge___p6Kly",
+	"emptyText": "-botpress-scheduler__style__emptyText___1E8ih",
+	"row-centered": "-botpress-scheduler__style__row-centered___14yce",
+	"col-centered": "-botpress-scheduler__style__col-centered___qoe4C",
+	"tasks": "-botpress-scheduler__style__tasks___3d5RE",
+	"trashAll": "-botpress-scheduler__style__trashAll___2-48U"
 };
 
 /***/ })
