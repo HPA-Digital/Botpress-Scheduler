@@ -2,6 +2,10 @@
 
 .vsls.json
 
+test/
+src/
+assets/
+
 # Logs
 /logs
 *.log
@@ -67,6 +71,3 @@ packages/yarn.lock
 **/.DS_Store
 
 *.cache
-
-# 11.x files
-bin/
