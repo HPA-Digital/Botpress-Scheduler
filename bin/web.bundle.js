@@ -9477,7 +9477,7 @@ exports.ForwardDateRefiner = __webpack_require__(352).Refiner;
 exports.UnlikelyFormatFilter = __webpack_require__(353).Refiner;
 
 // en refiners
-exports.ENMergeDateTimeRefiner = __webpack_require__(12).Refiner;
+exports.ENMergeDateTimeRefiner = __webpack_require__(11).Refiner;
 exports.ENMergeDateRangeRefiner = __webpack_require__(23).Refiner;
 exports.ENPrioritizeSpecificDateRefiner = __webpack_require__(354).Refiner;
 
@@ -9681,65 +9681,6 @@ module.exports = PropTypes;
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-  Copyright (c) 2017 Jed Watson.
-  Licensed under the MIT License (MIT), see
-  http://jedwatson.github.io/classnames
-*/
-/* global define */
-
-(function () {
-	'use strict';
-
-	var hasOwn = {}.hasOwnProperty;
-
-	function classNames () {
-		var classes = [];
-
-		for (var i = 0; i < arguments.length; i++) {
-			var arg = arguments[i];
-			if (!arg) continue;
-
-			var argType = typeof arg;
-
-			if (argType === 'string' || argType === 'number') {
-				classes.push(arg);
-			} else if (Array.isArray(arg) && arg.length) {
-				var inner = classNames.apply(null, arg);
-				if (inner) {
-					classes.push(inner);
-				}
-			} else if (argType === 'object') {
-				for (var key in arg) {
-					if (hasOwn.call(arg, key) && arg[key]) {
-						classes.push(key);
-					}
-				}
-			}
-		}
-
-		return classes.join(' ');
-	}
-
-	if (typeof module !== 'undefined' && module.exports) {
-		classNames.default = classNames;
-		module.exports = classNames;
-	} else if (true) {
-		// register as 'classnames', consistent with npm package name
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
-			return classNames;
-		}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	} else {
-		window.classNames = classNames;
-	}
-}());
-
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
 
 
@@ -9895,7 +9836,7 @@ var RIEStatefulBase = function (_RIEBase) {
 exports.default = RIEStatefulBase;
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, exports) {
 
 /*
@@ -9977,7 +9918,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -10359,7 +10300,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -10516,10 +10457,69 @@ exports.Refiner = function ENMergeDateTimeRefiner() {
 }
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, exports) {
 
 module.exports = ReactBootstrap;
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+  Copyright (c) 2017 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+/* global define */
+
+(function () {
+	'use strict';
+
+	var hasOwn = {}.hasOwnProperty;
+
+	function classNames () {
+		var classes = [];
+
+		for (var i = 0; i < arguments.length; i++) {
+			var arg = arguments[i];
+			if (!arg) continue;
+
+			var argType = typeof arg;
+
+			if (argType === 'string' || argType === 'number') {
+				classes.push(arg);
+			} else if (Array.isArray(arg) && arg.length) {
+				var inner = classNames.apply(null, arg);
+				if (inner) {
+					classes.push(inner);
+				}
+			} else if (argType === 'object') {
+				for (var key in arg) {
+					if (hasOwn.call(arg, key) && arg[key]) {
+						classes.push(key);
+					}
+				}
+			}
+		}
+
+		return classes.join(' ');
+	}
+
+	if (typeof module !== 'undefined' && module.exports) {
+		classNames.default = classNames;
+		module.exports = classNames;
+	} else if (true) {
+		// register as 'classnames', consistent with npm package name
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+			return classNames;
+		}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else {
+		window.classNames = classNames;
+	}
+}());
+
 
 /***/ }),
 /* 14 */
@@ -10813,7 +10813,7 @@ var _RIEToggle = __webpack_require__(284);
 
 var _RIEToggle2 = _interopRequireDefault(_RIEToggle);
 
-var _RIEStatefulBase2 = __webpack_require__(9);
+var _RIEStatefulBase2 = __webpack_require__(8);
 
 var _RIEStatefulBase3 = _interopRequireDefault(_RIEStatefulBase2);
 
@@ -28502,7 +28502,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _classnames = __webpack_require__(8);
+var _classnames = __webpack_require__(13);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -41099,7 +41099,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(11)(content, options);
+var update = __webpack_require__(10)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -52745,11 +52745,7 @@ var _lodash = __webpack_require__(24);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _reactBootstrap = __webpack_require__(13);
-
-var _classnames = __webpack_require__(8);
-
-var _classnames2 = _interopRequireDefault(_classnames);
+var _reactBootstrap = __webpack_require__(12);
 
 var _previous = __webpack_require__(279);
 
@@ -52775,6 +52771,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+//import classnames from 'classnames'
+
 var api = function api(route) {
   return '/api/botpress-scheduler/' + route;
 };
@@ -52798,10 +52796,16 @@ var SchedulerModule = function (_React$Component) {
   }
 
   _createClass(SchedulerModule, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      console.log('Will mount?');
+    }
+  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       var _this2 = this;
 
+      console.log('Scheduler did mount?');
       this.fetchAll().then(function () {
         _this2.setState({ loading: false });
       });
@@ -52811,6 +52815,7 @@ var SchedulerModule = function (_React$Component) {
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
+
       this.props.bp.events.off('scheduler.update', this.fetchAll.bind(this));
     }
   }, {
@@ -53053,7 +53058,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(13);
+var _reactBootstrap = __webpack_require__(12);
 
 var _reactToggle = __webpack_require__(26);
 
@@ -53063,7 +53068,7 @@ var _moment = __webpack_require__(1);
 
 var _moment2 = _interopRequireDefault(_moment);
 
-var _classnames = __webpack_require__(8);
+var _classnames = __webpack_require__(13);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -54193,7 +54198,7 @@ var _reactDom = __webpack_require__(14);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _RIEStatefulBase2 = __webpack_require__(9);
+var _RIEStatefulBase2 = __webpack_require__(8);
 
 var _RIEStatefulBase3 = _interopRequireDefault(_RIEStatefulBase2);
 
@@ -54289,7 +54294,7 @@ var _propTypes = __webpack_require__(7);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _RIEStatefulBase2 = __webpack_require__(9);
+var _RIEStatefulBase2 = __webpack_require__(8);
 
 var _RIEStatefulBase3 = _interopRequireDefault(_RIEStatefulBase2);
 
@@ -54399,7 +54404,7 @@ var _propTypes = __webpack_require__(7);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _RIEStatefulBase2 = __webpack_require__(9);
+var _RIEStatefulBase2 = __webpack_require__(8);
 
 var _RIEStatefulBase3 = _interopRequireDefault(_RIEStatefulBase2);
 
@@ -54591,7 +54596,7 @@ var _propTypes = __webpack_require__(7);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _RIEStatefulBase2 = __webpack_require__(9);
+var _RIEStatefulBase2 = __webpack_require__(8);
 
 var _RIEStatefulBase3 = _interopRequireDefault(_RIEStatefulBase2);
 
@@ -54674,7 +54679,7 @@ exports.default = RIESelect;
 /* 292 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(10)(false);
+exports = module.exports = __webpack_require__(9)(false);
 // imports
 
 
@@ -54798,7 +54803,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(11)(content, options);
+var update = __webpack_require__(10)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -54833,7 +54838,7 @@ if(false) {
 /* 295 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(10)(false);
+exports = module.exports = __webpack_require__(9)(false);
 // imports
 
 
@@ -54872,7 +54877,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(13);
+var _reactBootstrap = __webpack_require__(12);
 
 var _reactToggle = __webpack_require__(26);
 
@@ -54882,7 +54887,7 @@ var _moment = __webpack_require__(1);
 
 var _moment2 = _interopRequireDefault(_moment);
 
-var _classnames2 = __webpack_require__(8);
+var _classnames2 = __webpack_require__(13);
 
 var _classnames3 = _interopRequireDefault(_classnames2);
 
@@ -55014,7 +55019,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(11)(content, options);
+var update = __webpack_require__(10)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -55049,7 +55054,7 @@ if(false) {
 /* 298 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(10)(false);
+exports = module.exports = __webpack_require__(9)(false);
 // imports
 
 
@@ -55088,7 +55093,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(13);
+var _reactBootstrap = __webpack_require__(12);
 
 var _riek = __webpack_require__(19);
 
@@ -55100,7 +55105,7 @@ var _lodash = __webpack_require__(24);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _classnames = __webpack_require__(8);
+var _classnames = __webpack_require__(13);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -62055,7 +62060,7 @@ exports.Refiner = function FRMergeDateRangeRefiner() {
 */
 var ParsedComponents = __webpack_require__(2).ParsedComponents;
 var Refiner = __webpack_require__(5).Refiner;
-var mergeDateTimeComponent = __webpack_require__(12).mergeDateTimeComponent;
+var mergeDateTimeComponent = __webpack_require__(11).mergeDateTimeComponent;
 
 var PATTERN = new RegExp("^\\s*(T|à|a|vers|de|,|-)?\\s*$");
 
@@ -62185,9 +62190,9 @@ exports.Refiner = function DEMergeDateRangeRefiner() {
 var ParsedComponents = __webpack_require__(2).ParsedComponents;
 var Refiner = __webpack_require__(5).Refiner;
 
-var mergeDateTimeComponent = __webpack_require__(12).mergeDateTimeComponent;
-var isDateOnly = __webpack_require__(12).isDateOnly;
-var isTimeOnly = __webpack_require__(12).isTimeOnly;
+var mergeDateTimeComponent = __webpack_require__(11).mergeDateTimeComponent;
+var isDateOnly = __webpack_require__(11).isDateOnly;
+var isTimeOnly = __webpack_require__(11).isTimeOnly;
 
 var PATTERN = new RegExp("^\\s*(T|um|am|,|-)?\\s*$");
 
@@ -63874,7 +63879,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(11)(content, options);
+var update = __webpack_require__(10)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -63909,7 +63914,7 @@ if(false) {
 /* 363 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(10)(false);
+exports = module.exports = __webpack_require__(9)(false);
 // imports
 
 
@@ -63946,7 +63951,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(11)(content, options);
+var update = __webpack_require__(10)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -63981,7 +63986,7 @@ if(false) {
 /* 365 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(10)(false);
+exports = module.exports = __webpack_require__(9)(false);
 // imports
 
 
