@@ -2,10 +2,6 @@
 
 .vsls.json
 
-test/
-src/
-assets/
-
 # Logs
 /logs
 *.log
