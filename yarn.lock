@@ -3039,9 +3039,10 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
   integrity sha512-s5kLOcnH0XqDO+FvuaLX8DDjZ18CGFk7VygH40QoKPUQhW4e2rvM0rwUq0t8IQDOwYSeLK01U90OjzBTme2QqA==
 
-later@RickCarlino/later:
+later@^1.2.0:
   version "1.2.0"
-  resolved "https://codeload.github.com/RickCarlino/later/tar.gz/fc9ceb582728f75edbf9581e4f53da5fbb8cd4ac"
+  resolved "https://registry.yarnpkg.com/later/-/later-1.2.0.tgz#f2cf6c4dd7956dd2f520adf0329836e9876bad0f"
+  integrity sha1-8s9sTdeVbdL1IK3wMpg26YdrrQ8=
 
 lazy-cache@^1.0.3:
   version "1.0.4"

@@ -8,7 +8,10 @@
     "menuIcon": "alarm_on",
     "webBundle": "bin/web.bundle.js"
   },
-  "keywords": ["messenger", "scheduler"],
+  "keywords": [
+    "messenger",
+    "scheduler"
+  ],
   "version-manager": {
     "warn": "",
     "botpress-check": ">= 0.1",
@@ -24,8 +27,13 @@
     "compile": "node webpack.js --compile"
   },
   "babel": {
-    "presets": ["latest", "stage-0"],
-    "plugins": ["transform-object-rest-spread"]
+    "presets": [
+      "latest",
+      "stage-0"
+    ],
+    "plugins": [
+      "transform-object-rest-spread"
+    ]
   },
   "repository": {
     "type": "git",
@@ -69,7 +77,7 @@
     "bluebird": "^3.4.6",
     "botpress-version-manager": "^1.0.2",
     "cronstrue": "^0.8.0",
-    "later": "RickCarlino/later",
+    "later": "^1.2.0",
     "lodash": "^4.17.2",
     "moment": "^2.17.1",
     "validate-arguments": "0.0.8"
